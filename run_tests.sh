@@ -1,4 +1,9 @@
-files=$(./v/v ./bubble-sort/bubble_sort_test.v)
-if [[ $? == 0 ]]; then
-    echo "All tests completed successfully."
-fi
+files=$(find $(ls | grep -v 'v') -name '*_test.v')
+for f in $files
+do
+	echo "Processing $f"
+    $(./v/v "./$f")
+    if [[ $? == 0 ]]; then
+        echo "Test successful."
+    fi
+done
